@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./docker.sock:/tmp/docker.sock:ro
+
+  # your_app:
+  #   image: your/app
+  #   container_name: your_app
+  #   environment:
+  #     - VIRTUAL_HOST=yourdomain.com
+  #     - VIRTUAL_PORT=your_app_port
+  #   expose:
+  #     - "your_app_port"
+  #   networks:
+  #     - default
+  #     - nginx-proxy
+
+networks:
+  default:
+  nginx-proxy:
+    external:
+      name: nginx-proxy
